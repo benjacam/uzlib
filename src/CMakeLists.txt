@@ -1,0 +1,6 @@
+add_library(uzlib INTERFACE)
+set(SRC_LIST crc32 defl_static genlz77 tinfgzip tinflate tinfzlib)
+list(TRANSFORM SRC_LIST PREPEND ${CMAKE_CURRENT_LIST_DIR}/)
+list(TRANSFORM SRC_LIST APPEND ".c")
+target_sources(uzlib INTERFACE ${SRC_LIST})
+target_include_directories(uzlib INTERFACE ${CMAKE_CURRENT_LIST_DIR})

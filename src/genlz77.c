@@ -103,7 +103,10 @@ void uzlib_compress(struct uzlib_comp *data, const uint8_t *src, unsigned slen)
         const uint8_t **bucket = &data->hash_table[h & (HASH_SIZE - 1)];
         const uint8_t *subs = *bucket;
         *bucket = src;
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wsign-compare"
         if (subs && src > subs && (src - subs) <= MAX_OFFSET && !memcmp(src, subs, MIN_MATCH)) {
+#pragma GCC diagnostic pop
             src += MIN_MATCH;
             const uint8_t *m = subs + MIN_MATCH;
             int len = MIN_MATCH;

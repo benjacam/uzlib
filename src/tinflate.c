@@ -465,7 +465,10 @@ static int tinf_inflate_block_data(TINF_DATA *d, TINF_TREE *lt, TINF_TREE *dt)
             }
         } else {
             /* catch trying to point before the start of dest buffer */
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wsign-compare"
             if (offs > d->dest - d->destStart) {
+#pragma GCC diagnostic pop
                 return TINF_DATA_ERROR;
             }
             d->lzOff = -offs;
